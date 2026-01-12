@@ -5,7 +5,7 @@
     $fyh_creacion = date('Y-m-d H:i:s');
     $fyh_actualizacion = date('Y-m-d H:i:s');
     $URL = "http://localhost/academy";
-    define("APP_NAME", "Academia de Basquetbol PSM - UTS");
+    define("APP_NAME", "Basquet University");
 
     define("SERVIDOR", "localhost");
     define("USUARIO", "root");
