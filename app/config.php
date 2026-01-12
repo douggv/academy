@@ -10,7 +10,7 @@
     define("SERVIDOR", "localhost");
     define("USUARIO", "root");
     define("PASSWORD", "");
-    define("BD", "baseball");
+    define("BD", "academy");
 
     $servidor = "mysql:dbname=".BD.";host=".SERVIDOR;
 
