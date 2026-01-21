@@ -144,10 +144,9 @@
                         <span class="input-group-text"><i class="bi bi-shield-lock-fill"></i></span>
                         <select class="form-select" name="tipo_usuario" required>
                             <option value="" selected disabled>Seleccionar...</option>
-                            <option value="coordinador">Coordinador</option>
-                            <option value="ojeador">Ojeador</option>
-                            <option value="jugador">Jugador</option>
-                            <option value="entrenador">Entrenador</option>
+                            <option value="2">Coordinador</option>
+                            <option value="1">Ojeador</option>
+                            <option value="3">Entrenador</option>
                         </select>
                     </div>
                 </div>

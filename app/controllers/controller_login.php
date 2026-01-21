@@ -1,10 +1,12 @@
 <?php
     include '../config.php';
     $email = $_POST['email'];
-    $password = $_POST['password'];    
-    $sql = "SELECT * FROM usuarios WHERE email_usuario = ?";    
+    $password = $_POST['password']; 
+    $rol = $_POST['tipo_usuario'];
+    $sql = "SELECT * FROM usuarios WHERE email_usuario = ? AND id_rol_fk = ?";    
     $query = $pdo->prepare($sql);
     $query->bindParam(1, $email, PDO::PARAM_STR);
+    $query->bindParam(2, $rol, PDO::PARAM_STR);
     $query->execute();
     $usuarios = $query->fetchAll(PDO::FETCH_ASSOC);
     $contador = 0;
@@ -19,14 +21,23 @@
     if($contador > 0){
         // verificamos los roles : 1 = ojeador, 3 coordinador, 4 entrenador
         if($rol == "1"){
-            $_SESSION['sesion'] = $email;
-            header('Location: '.$URL.'/client/ojeador/index.php');
+            session_start();
+            $_SESSION['sesionojeador'] = $email;
+            $_SESSION['rol'] = $rol;
+
+            header('Location: '.$URL.'/client/ojeador/views/index.php');
+        } elseif($rol == "2"){
+            session_start();
+            $_SESSION['sesioncoordinador'] = $email;
+            $_SESSION['rol'] = $rol;
+
+            header('Location: '.$URL.'/client/coordinador/views/index.php');
         } elseif($rol == "3"){
-            $_SESSION['sesion'] = $email;
-            header('Location: '.$URL.'/client/coordinador/index.php');
-        } elseif($rol == "4"){
-            $_SESSION['sesion'] = $email;
-            header('Location: '.$URL.'/client/entrenador/index.php');
+            session_start();
+            $_SESSION['sesionentrenador'] = $email;
+            $_SESSION['rol'] = $rol;
+
+            header('Location: '.$URL.'/client/entrenador/views/index.php');
         }
 
             
