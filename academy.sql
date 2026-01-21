@@ -1,0 +1,411 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 21-01-2026 a las 02:43:20
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `academy`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `academias`
+--
+
+CREATE TABLE `academias` (
+  `id_universidad` int(11) NOT NULL,
+  `nombre_universidad` varchar(100) NOT NULL,
+  `ubicacion` varchar(255) DEFAULT NULL,
+  `imagen` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `academias`
+--
+
+INSERT INTO `academias` (`id_universidad`, `nombre_universidad`, `ubicacion`, `imagen`) VALUES
+(1, 'Santiago Mariño', 'la limpia', '/client/assets/img/psm.webp'),
+(2, 'Antonio Jose de Sucre', 'la limpia', '/client/assets/img/iuts.webp');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `asistencia`
+--
+
+CREATE TABLE `asistencia` (
+  `id_asistencia` int(11) NOT NULL,
+  `fecha_hora_asistencia` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_asistencia_jugador`
+--
+
+CREATE TABLE `detalle_asistencia_jugador` (
+  `id_detalle_asistencia` int(11) NOT NULL,
+  `id_asistencia_fk` int(11) DEFAULT NULL,
+  `id_jugador_fk` int(11) DEFAULT NULL,
+  `estado` enum('presente','ausente','justificado') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_juego_academias`
+--
+
+CREATE TABLE `detalle_juego_academias` (
+  `id_detalle_juego` int(11) NOT NULL,
+  `id_juego_fk` int(11) DEFAULT NULL,
+  `id_universidad_fk` int(11) DEFAULT NULL,
+  `resultado` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `juegos`
+--
+
+CREATE TABLE `juegos` (
+  `id_juego` int(11) NOT NULL,
+  `tipo_juego` varchar(50) DEFAULT NULL,
+  `fecha_juego` datetime DEFAULT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `fecha_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `jugadores`
+--
+
+CREATE TABLE `jugadores` (
+  `id_jugador` int(11) NOT NULL,
+  `nombre_jugador` varchar(100) DEFAULT NULL,
+  `email_jugador` varchar(100) DEFAULT NULL,
+  `password_jugador` varchar(255) DEFAULT NULL,
+  `altura_jugador` decimal(3,2) DEFAULT NULL,
+  `peso_jugador` decimal(5,2) DEFAULT NULL,
+  `fecha_nacimiento` date DEFAULT NULL,
+  `id_universidad_fk` int(11) DEFAULT NULL,
+  `id_objetivo_fk` int(11) DEFAULT NULL,
+  `isActive` int(11) DEFAULT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `fecha_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `jugadores`
+--
+
+INSERT INTO `jugadores` (`id_jugador`, `nombre_jugador`, `email_jugador`, `password_jugador`, `altura_jugador`, `peso_jugador`, `fecha_nacimiento`, `id_universidad_fk`, `id_objetivo_fk`, `isActive`, `fecha_creacion`, `fecha_actualizacion`) VALUES
+(1, 'Harold', 'harold@gmail.com', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 1.83, 90.00, NULL, 1, NULL, 1, '2026-01-20 15:37:00', '2026-01-20 15:37:00'),
+(2, 'Gustavo', 'gustavo@gmail.com', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 1.70, 80.00, NULL, 1, NULL, 1, '2026-01-20 15:37:30', '2026-01-20 15:37:30');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `objetivos`
+--
+
+CREATE TABLE `objetivos` (
+  `id_objetivo` int(11) NOT NULL,
+  `puntos` int(11) DEFAULT 0,
+  `asistencias` int(11) DEFAULT 0,
+  `rebotes` int(11) DEFAULT 0,
+  `robos` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `planificacion`
+--
+
+CREATE TABLE `planificacion` (
+  `id_planificacion` int(11) NOT NULL,
+  `id_universidad_fk` int(11) DEFAULT NULL,
+  `planificacion_cualitativa` text DEFAULT NULL,
+  `fecha_planificada` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `progreso`
+--
+
+CREATE TABLE `progreso` (
+  `id_progreso` int(11) NOT NULL,
+  `id_jugador_fk` int(11) DEFAULT NULL,
+  `calificacion_cualitativa` text DEFAULT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `roles`
+--
+
+CREATE TABLE `roles` (
+  `id_rol` int(11) NOT NULL,
+  `nombre_rol` enum('ojeador','coordinador','entrenador') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`id_rol`, `nombre_rol`) VALUES
+(1, 'ojeador'),
+(2, 'coordinador'),
+(3, 'entrenador');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id_usuario` int(11) NOT NULL,
+  `nombre_usuario` varchar(100) NOT NULL,
+  `password_usuario` varchar(255) NOT NULL,
+  `email_usuario` varchar(100) DEFAULT NULL,
+  `id_universidad_fk` int(11) DEFAULT NULL,
+  `id_rol_fk` int(11) DEFAULT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `fecha_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `isActive` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `password_usuario`, `email_usuario`, `id_universidad_fk`, `id_rol_fk`, `fecha_creacion`, `fecha_actualizacion`, `isActive`) VALUES
+(1, 'douglas', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'gordo@gmail.com', 1, 1, '2026-01-19 21:01:07', '2026-01-21 01:29:16', 1),
+(2, 'gustavo', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'gustavo@gmail.com', 1, 3, '2026-01-19 23:04:49', '2026-01-19 23:04:49', NULL),
+(3, 'pedro', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'pedrogmail.com', 1, 2, '2026-01-20 15:45:05', '2026-01-20 15:45:05', NULL);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `academias`
+--
+ALTER TABLE `academias`
+  ADD PRIMARY KEY (`id_universidad`);
+
+--
+-- Indices de la tabla `asistencia`
+--
+ALTER TABLE `asistencia`
+  ADD PRIMARY KEY (`id_asistencia`);
+
+--
+-- Indices de la tabla `detalle_asistencia_jugador`
+--
+ALTER TABLE `detalle_asistencia_jugador`
+  ADD PRIMARY KEY (`id_detalle_asistencia`),
+  ADD KEY `id_asistencia_fk` (`id_asistencia_fk`),
+  ADD KEY `id_jugador_fk` (`id_jugador_fk`);
+
+--
+-- Indices de la tabla `detalle_juego_academias`
+--
+ALTER TABLE `detalle_juego_academias`
+  ADD PRIMARY KEY (`id_detalle_juego`),
+  ADD KEY `id_juego_fk` (`id_juego_fk`),
+  ADD KEY `id_universidad_fk` (`id_universidad_fk`);
+
+--
+-- Indices de la tabla `juegos`
+--
+ALTER TABLE `juegos`
+  ADD PRIMARY KEY (`id_juego`);
+
+--
+-- Indices de la tabla `jugadores`
+--
+ALTER TABLE `jugadores`
+  ADD PRIMARY KEY (`id_jugador`),
+  ADD UNIQUE KEY `email_jugador` (`email_jugador`),
+  ADD KEY `id_universidad_fk` (`id_universidad_fk`),
+  ADD KEY `id_objetivo_fk` (`id_objetivo_fk`);
+
+--
+-- Indices de la tabla `objetivos`
+--
+ALTER TABLE `objetivos`
+  ADD PRIMARY KEY (`id_objetivo`);
+
+--
+-- Indices de la tabla `planificacion`
+--
+ALTER TABLE `planificacion`
+  ADD PRIMARY KEY (`id_planificacion`),
+  ADD KEY `id_universidad_fk` (`id_universidad_fk`);
+
+--
+-- Indices de la tabla `progreso`
+--
+ALTER TABLE `progreso`
+  ADD PRIMARY KEY (`id_progreso`),
+  ADD KEY `id_jugador_fk` (`id_jugador_fk`);
+
+--
+-- Indices de la tabla `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id_rol`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `email_usuario` (`email_usuario`),
+  ADD KEY `id_universidad_fk` (`id_universidad_fk`),
+  ADD KEY `id_rol_fk` (`id_rol_fk`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `academias`
+--
+ALTER TABLE `academias`
+  MODIFY `id_universidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `asistencia`
+--
+ALTER TABLE `asistencia`
+  MODIFY `id_asistencia` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_asistencia_jugador`
+--
+ALTER TABLE `detalle_asistencia_jugador`
+  MODIFY `id_detalle_asistencia` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_juego_academias`
+--
+ALTER TABLE `detalle_juego_academias`
+  MODIFY `id_detalle_juego` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `juegos`
+--
+ALTER TABLE `juegos`
+  MODIFY `id_juego` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `jugadores`
+--
+ALTER TABLE `jugadores`
+  MODIFY `id_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `objetivos`
+--
+ALTER TABLE `objetivos`
+  MODIFY `id_objetivo` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `planificacion`
+--
+ALTER TABLE `planificacion`
+  MODIFY `id_planificacion` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `progreso`
+--
+ALTER TABLE `progreso`
+  MODIFY `id_progreso` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `detalle_asistencia_jugador`
+--
+ALTER TABLE `detalle_asistencia_jugador`
+  ADD CONSTRAINT `detalle_asistencia_jugador_ibfk_1` FOREIGN KEY (`id_asistencia_fk`) REFERENCES `asistencia` (`id_asistencia`),
+  ADD CONSTRAINT `detalle_asistencia_jugador_ibfk_2` FOREIGN KEY (`id_jugador_fk`) REFERENCES `jugadores` (`id_jugador`);
+
+--
+-- Filtros para la tabla `detalle_juego_academias`
+--
+ALTER TABLE `detalle_juego_academias`
+  ADD CONSTRAINT `detalle_juego_academias_ibfk_1` FOREIGN KEY (`id_juego_fk`) REFERENCES `juegos` (`id_juego`),
+  ADD CONSTRAINT `detalle_juego_academias_ibfk_2` FOREIGN KEY (`id_universidad_fk`) REFERENCES `academias` (`id_universidad`);
+
+--
+-- Filtros para la tabla `jugadores`
+--
+ALTER TABLE `jugadores`
+  ADD CONSTRAINT `jugadores_ibfk_1` FOREIGN KEY (`id_universidad_fk`) REFERENCES `academias` (`id_universidad`),
+  ADD CONSTRAINT `jugadores_ibfk_2` FOREIGN KEY (`id_objetivo_fk`) REFERENCES `objetivos` (`id_objetivo`);
+
+--
+-- Filtros para la tabla `planificacion`
+--
+ALTER TABLE `planificacion`
+  ADD CONSTRAINT `planificacion_ibfk_1` FOREIGN KEY (`id_universidad_fk`) REFERENCES `academias` (`id_universidad`);
+
+--
+-- Filtros para la tabla `progreso`
+--
+ALTER TABLE `progreso`
+  ADD CONSTRAINT `progreso_ibfk_1` FOREIGN KEY (`id_jugador_fk`) REFERENCES `jugadores` (`id_jugador`);
+
+--
+-- Filtros para la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_universidad_fk`) REFERENCES `academias` (`id_universidad`),
+  ADD CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`id_rol_fk`) REFERENCES `roles` (`id_rol`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
