@@ -1,0 +1,71 @@
+<?php include '../../layouts/verificacion.php'; ?>
+
+<?php include '../../layouts/parte1.php'; ?> 
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow border-0">
+                <div class="card-header bg-dark text-white text-center py-3">
+                    <h4 class="mb-0"><i class="bi bi-person-badge"></i> Registro de Jugador</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form action="<?php echo $URL ?>/app/controllers/controllers_entrenador/jugadores/create.php" method="POST" enctype="multipart/form-data">
+                        
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Nombre Completo</label>
+                                    <input type="text" name="nombre_jugador" class="form-control" 
+                                           pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Email</label>
+                                    <input type="email" name="email_jugador" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold text-center d-block">Foto Perfil</label>
+                                    <div class="d-flex flex-column align-items-center border rounded p-2 bg-light">
+                                        <i class="bi bi-camera text-muted" style="font-size: 2rem;"></i>
+                                        <input type="file" name="imagen_jugador" id="foto" class="form-control form-control-sm mt-2" accept="image/*">
+                                    </div>
+                                    <small class="text-muted d-block mt-1">Formatos: JPG, PNG</small>
+                                </div>
+                            </div>
+                        </div>
+                        <input value="<?php echo $usuarioLogueado['id_universidad_fk']; ?>" type="hidden" name="id_universidad_fk">
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Altura (cm)</label>
+                                <input type="number" name="altura_jugador" class="form-control" placeholder="190" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Peso (kg)</label>
+                                <input type="number" name="peso_jugador" class="form-control" placeholder="80" step="0.1" required>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <label class="form-label fw-bold">Nacimiento</label>
+                                <input type="date" name="fecha_nacimiento" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-cloud-arrow-up"></i> Guardar Jugador
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<?php include '../../layouts/parte2.php'; ?>  

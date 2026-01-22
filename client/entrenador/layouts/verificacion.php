@@ -16,7 +16,29 @@
         header('Location: ' . $URL . '/login.php');
         exit(); 
     } else {
+        
         $usuario_sesion = $_SESSION['sesionentrenador'];
+        $rol = $_SESSION['rol'];
         $rol_sesion = "Entrenador";
+
+        // 1. Usamos un marcador de posición (:email) en lugar de la variable directa
+        $sql2 = "SELECT * FROM usuarios WHERE email_usuario = :email";
+
+        // 2. Preparamos la consulta
+        $query = $pdo->prepare($sql2);
+
+        // 3. Vinculamos el valor de la sesión al marcador
+        $query->bindParam(':email', $usuario_sesion);
+
+        // 4. Ejecutamos
+        $query->execute();
+
+        // 5. Como es un solo usuario, usamos fetch() en lugar de fetchAll() 
+        // para acceder directo a los datos sin un bucle foreach adicional.
+        $usuarioLogueado = $query->fetch(PDO::FETCH_ASSOC);
+    
+        
     }
+    
 ?>
+<?php echo $usuarioLogueado['id_universidad_fk']; ?>
