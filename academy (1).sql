@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-01-2026 a las 02:43:20
+-- Tiempo de generación: 23-01-2026 a las 23:22:00
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -111,16 +111,19 @@ CREATE TABLE `jugadores` (
   `id_objetivo_fk` int(11) DEFAULT NULL,
   `isActive` int(11) DEFAULT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
-  `fecha_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `fecha_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `imagen_jugador` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `jugadores`
 --
 
-INSERT INTO `jugadores` (`id_jugador`, `nombre_jugador`, `email_jugador`, `password_jugador`, `altura_jugador`, `peso_jugador`, `fecha_nacimiento`, `id_universidad_fk`, `id_objetivo_fk`, `isActive`, `fecha_creacion`, `fecha_actualizacion`) VALUES
-(1, 'Harold', 'harold@gmail.com', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 1.83, 90.00, NULL, 1, NULL, 1, '2026-01-20 15:37:00', '2026-01-20 15:37:00'),
-(2, 'Gustavo', 'gustavo@gmail.com', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 1.70, 80.00, NULL, 1, NULL, 1, '2026-01-20 15:37:30', '2026-01-20 15:37:30');
+INSERT INTO `jugadores` (`id_jugador`, `nombre_jugador`, `email_jugador`, `password_jugador`, `altura_jugador`, `peso_jugador`, `fecha_nacimiento`, `id_universidad_fk`, `id_objetivo_fk`, `isActive`, `fecha_creacion`, `fecha_actualizacion`, `imagen_jugador`) VALUES
+(1, 'Harold', 'harold@gmail.com', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 1.83, 90.00, NULL, 1, NULL, 1, '2026-01-20 15:37:00', '2026-01-20 15:37:00', NULL),
+(2, 'Gustavoo', 'gustavo@gmail.com', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 1.70, 80.00, '2026-01-13', 1, NULL, 1, '2026-01-20 15:37:30', '2026-01-23 22:01:51', '2026-01-23-06-01-51-iuts.webp'),
+(3, 'Mario', 'mario@gmail.com', NULL, 9.99, 70.50, NULL, NULL, NULL, NULL, '2026-01-22 18:38:03', '2026-01-22 18:38:03', 'Mario_1769107083_marioimagen.webp'),
+(4, 'cristian', 'cristian@gmail.com', NULL, 9.99, 70.00, NULL, NULL, NULL, NULL, '2026-01-22 18:46:57', '2026-01-22 18:46:57', 'cristian_1769107617_marioimagen.webp');
 
 -- --------------------------------------------------------
 
@@ -205,7 +208,6 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `password_usuario`, `email_usuario`, `id_universidad_fk`, `id_rol_fk`, `fecha_creacion`, `fecha_actualizacion`, `isActive`) VALUES
-(1, 'douglas', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'gordo@gmail.com', 1, 1, '2026-01-19 21:01:07', '2026-01-21 01:29:16', 1),
 (2, 'gustavo', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'gustavo@gmail.com', 1, 3, '2026-01-19 23:04:49', '2026-01-19 23:04:49', NULL),
 (3, 'pedro', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'pedrogmail.com', 1, 2, '2026-01-20 15:45:05', '2026-01-20 15:45:05', NULL);
 
@@ -329,7 +331,7 @@ ALTER TABLE `juegos`
 -- AUTO_INCREMENT de la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `id_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `objetivos`
