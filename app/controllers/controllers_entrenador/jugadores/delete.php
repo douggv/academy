@@ -7,7 +7,7 @@ $id_jugador = $_POST['id_jugador'];
 
 // 2. Consultar el nombre de la imagen antes de borrar el registro
 // Esto es necesario para poder eliminar el archivo de la carpeta
-$query_foto = $spdo->prepare("SELECT imagen_jugador FROM jugadores WHERE id_jugador = :id_jugador");
+$query_foto = $pdo->prepare("SELECT imagen_jugador FROM jugadores WHERE id_jugador = :id_jugador");
 $query_foto->bindParam(':id_jugador', $id_jugador);
 $query_foto->execute();
 $datos_jugador = $query_foto->fetch(PDO::FETCH_ASSOC);
