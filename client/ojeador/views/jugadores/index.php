@@ -73,10 +73,11 @@
             <article class="col-md-4 mb-4">
                 <div class="card h-100 shadow-sm border-0" style="border-top: 4px solid var(--naranja-basket) !important;">
                     <div class="text-center p-3">
-                        <img src="<?php echo $URL; ?><?php echo $jugador['imagen']; ?>" 
+
+                        <img src="<?php echo $URL; ?>/client/assets/img/jugadores/<?php echo $jugador['imagen_jugador']; ?>" 
                              class="card-img-top img-fluid" 
                              alt="<?php echo htmlspecialchars($jugador['nombre_jugador']); ?>"
-                             style="max-height: 150px; object-fit: contain;">
+                             style="max-height: 200px; object-fit: contain;">
                     </div>
 
                     <div class="card-body text-center">

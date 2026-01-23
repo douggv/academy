@@ -2,7 +2,7 @@
 
 <?php include '../../layouts/parte1.php'; ?> 
 <?php include '../../../../app/controllers/controllers_entrenador/jugadores/read.php'; ?> 
-<?php echo $usuarioLogueado['id_universidad_fk']; ?>
+
 
 
 
@@ -34,9 +34,16 @@
                             </td>
                             <td class="text-center"><?= htmlspecialchars($jugador['peso_jugador']) ?> kg</td>
                             <td class="text-center">
-                                <a href="perfil_jugador.php?id=<?= $jugador['id_jugador'] ?>" class="btn btn-outline-primary btn-sm">
+                                <a href="read.php?id=<?= $jugador['id_jugador'] ?>" class="btn btn-outline-primary btn-sm">
                                     <i class="bi bi-person-bounding-box"></i> Ver Detalles
                                 </a>
+                                <a href="update.php?id=<?= $jugador['id_jugador'] ?>" class="btn btn-outline-warning btn-sm">
+                                    <i class="bi bi-person-bounding-box"></i> Actualizar
+                                </a>                                
+                                <a href="delete.php?id=<?= $jugador['id_jugador'] ?>" class="btn btn-outline-danger btn-sm ms-2">
+                                    <i class="bi bi-trash"></i> Eliminar
+                                </a>
+                                
                             </td>
                         </tr>
                     <?php endforeach; ?>
