@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-01-2026 a las 23:22:00
+-- Tiempo de generación: 23-01-2026 a las 23:33:33
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -209,7 +209,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `password_usuario`, `email_usuario`, `id_universidad_fk`, `id_rol_fk`, `fecha_creacion`, `fecha_actualizacion`, `isActive`) VALUES
 (2, 'gustavo', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'gustavo@gmail.com', 1, 3, '2026-01-19 23:04:49', '2026-01-19 23:04:49', NULL),
-(3, 'pedro', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'pedrogmail.com', 1, 2, '2026-01-20 15:45:05', '2026-01-20 15:45:05', NULL);
+(3, 'pedro', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'pedrogmail.com', 1, 2, '2026-01-20 15:45:05', '2026-01-20 15:45:05', NULL),
+(4, 'Hidalgo', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'hidalgo@gmail.com', 1, 3, '2026-01-23 22:32:58', '2026-01-23 22:32:58', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -361,7 +362,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
