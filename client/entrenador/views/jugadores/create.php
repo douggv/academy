@@ -2,6 +2,53 @@
 
 <?php include '../../layouts/parte1.php'; ?> 
 
+<?php
+    // Solo inicia sesión si no hay una activa
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    if(isset($_SESSION['mensaje'])):
+        $mensaje = $_SESSION['mensaje'];
+        // Si no existe 'color', usamos 'alert-info' por defecto
+        $color = isset($_SESSION['color']) ? $_SESSION['color'] : 'alert-info';
+?>
+    <div id="alerta-flotante" 
+         class="alert <?= $color ?> alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3 shadow-lg" 
+         style="z-index: 9999; min-width: 320px; text-align: center;" 
+         role="alert">
+        
+        <i class="bi bi-info-circle me-2"></i> <strong><?= $mensaje ?></strong>
+        
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <script>
+        setTimeout(function() {
+            const alerta = document.getElementById('alerta-flotante');
+            if (alerta) {
+                alerta.classList.remove('show');
+                setTimeout(() => alerta.remove(), 500);
+            }
+        }, 3000);
+    </script>
+
+<?php 
+    unset($_SESSION['mensaje']);
+    unset($_SESSION['color']);
+    endif; 
+?>
+
+
+
+
+
+
+
+
+
+
+
 
 <div class="container mt-5">
     <div class="row justify-content-center">

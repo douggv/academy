@@ -7,7 +7,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="index.php">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?php echo $URL; ?>/client/ojeador/views/jugadores/index.php">Jugadores</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo $URL; ?>/client/ojeador/views/universidades.php">Jugadores</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo $URL; ?>/client/ojeador/views/universidades.php">Universidades</a></li>
                     <li class="nav-item ms-lg-4"><a class="nav-link" href="#servicios"><?php echo $usuario_sesion; ?></a> </li>
                     <li class="nav-item ms-lg-2"><a class="nav-link" href="#servicios"><?php echo $rol_sesion; ?></a></li>

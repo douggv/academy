@@ -85,7 +85,7 @@
                     </div>
                     
                     <div class="card-footer bg-white border-0 pb-4">
-                        <a href="jugadores/index.php?universidad=<?php echo $uni['id_universidad']; ?>" 
+                        <a href="jugadores.php?universidad=<?php echo $uni['id_universidad']; ?>" 
                            class="btn w-100 fw-bold" 
                            style="background-color: var(--naranja-basket); color: white; border-radius: 25px;">
                            VER JUGADORES
