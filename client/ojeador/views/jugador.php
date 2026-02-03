@@ -12,7 +12,7 @@ if (isset($_GET['id'])) {
     $id_universidad = $_GET['id_universidad'] ?? null;
 
     // Consulta con INNER JOIN a universidades y objetivos
-    $query = $pdo->prepare("SELECT j.*, u.nombre_universidad, u.ubicacion, o.puntos, o.asistencias, o.rebotes, o.robos 
+    $query = $pdo->prepare("SELECT j.*, u.nombre_universidad, u.ubicacion, o.puntos_o, o.asistencias_o, o.rebotes_o, o.robos_o 
                             FROM jugadores j
                             INNER JOIN academias u ON j.id_universidad_fk = u.id_universidad
                             INNER JOIN objetivos o ON j.id_objetivo_fk = o.id_objetivo
@@ -87,7 +87,7 @@ if (isset($_GET['id'])) {
                     <hr class="text-muted">
 
                     <!-- Sección de Objetivos / Estadísticas -->
-                    <h5 class="text-center fw-bold mb-3" style="color: var(--azul-dark);">OBJETIVOS DE TEMPORADA</h5>
+                    <h5 class="text-center fw-bold mb-3" style="color: var(--azul-dark);">ESTADÍSTICAS</h5>
                     <div class="row g-3">
                         <div class="col-3">
                             <div class="stat-box">

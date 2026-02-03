@@ -82,6 +82,28 @@ include '../../layouts/parte1.php';
                                        value="<?php echo $jugador['fecha_nacimiento']; ?>" required>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Puntos</label>
+                                <input type="number" name="puntos" class="form-control"
+                                        value="<?php echo $jugador['puntos']; ?>" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Asistencias</label>
+                                <input type="number" name="asistencias" class="form-control"
+                                        value="<?php echo $jugador['asistencias']; ?>" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Rebotes</label>
+                                <input type="number" name="rebotes" class="form-control"
+                                        value="<?php echo $jugador['rebotes']; ?>" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Robos</label>
+                                <input type="number" name="robos" class="form-control"
+                                        value="<?php echo $jugador['robos']; ?>" required>
+                            </div>
+                        </div>
 
                         <hr>
                         <div class="d-flex justify-content-end gap-2">
