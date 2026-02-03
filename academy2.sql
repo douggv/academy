@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-01-2026 a las 23:33:33
+-- Tiempo de generación: 04-02-2026 a las 00:54:29
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `academy`
+-- Base de datos: `academy2`
 --
 
 -- --------------------------------------------------------
@@ -112,18 +112,26 @@ CREATE TABLE `jugadores` (
   `isActive` int(11) DEFAULT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `fecha_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `imagen_jugador` text DEFAULT NULL
+  `imagen_jugador` text DEFAULT NULL,
+  `puntos` int(11) DEFAULT NULL,
+  `asistencias` int(11) DEFAULT NULL,
+  `rebotes` int(11) DEFAULT NULL,
+  `robos` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `jugadores`
 --
 
-INSERT INTO `jugadores` (`id_jugador`, `nombre_jugador`, `email_jugador`, `password_jugador`, `altura_jugador`, `peso_jugador`, `fecha_nacimiento`, `id_universidad_fk`, `id_objetivo_fk`, `isActive`, `fecha_creacion`, `fecha_actualizacion`, `imagen_jugador`) VALUES
-(1, 'Harold', 'harold@gmail.com', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 1.83, 90.00, NULL, 1, NULL, 1, '2026-01-20 15:37:00', '2026-01-20 15:37:00', NULL),
-(2, 'Gustavoo', 'gustavo@gmail.com', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 1.70, 80.00, '2026-01-13', 1, NULL, 1, '2026-01-20 15:37:30', '2026-01-23 22:01:51', '2026-01-23-06-01-51-iuts.webp'),
-(3, 'Mario', 'mario@gmail.com', NULL, 9.99, 70.50, NULL, NULL, NULL, NULL, '2026-01-22 18:38:03', '2026-01-22 18:38:03', 'Mario_1769107083_marioimagen.webp'),
-(4, 'cristian', 'cristian@gmail.com', NULL, 9.99, 70.00, NULL, NULL, NULL, NULL, '2026-01-22 18:46:57', '2026-01-22 18:46:57', 'cristian_1769107617_marioimagen.webp');
+INSERT INTO `jugadores` (`id_jugador`, `nombre_jugador`, `email_jugador`, `password_jugador`, `altura_jugador`, `peso_jugador`, `fecha_nacimiento`, `id_universidad_fk`, `id_objetivo_fk`, `isActive`, `fecha_creacion`, `fecha_actualizacion`, `imagen_jugador`, `puntos`, `asistencias`, `rebotes`, `robos`) VALUES
+(3, 'Mario', 'mario@gmail.com', NULL, 9.99, 70.50, NULL, NULL, NULL, NULL, '2026-01-22 18:38:03', '2026-01-22 18:38:03', 'Mario_1769107083_marioimagen.webp', NULL, NULL, NULL, NULL),
+(4, 'cristian', 'cristian@gmail.com', NULL, 9.99, 70.00, NULL, NULL, NULL, NULL, '2026-01-22 18:46:57', '2026-01-22 18:46:57', 'cristian_1769107617_marioimagen.webp', NULL, NULL, NULL, NULL),
+(12, 'Harold Rojas', 'harolde@gmail.com', NULL, 9.99, 105.00, NULL, 1, 1, NULL, '2026-01-23 23:48:56', '2026-02-02 15:35:04', 'Harold Rojas_1769212136_harold.jpg', NULL, NULL, NULL, NULL),
+(13, 'Gustavo Yanes', 'gustavo@gmail.com', NULL, 9.99, 85.00, '2026-02-01', 1, 1, NULL, '2026-01-23 23:50:00', '2026-02-03 13:40:09', 'Gustavo Yanes_1769212200_gustavo.jpg', 10, 3, 1, 1),
+(14, 'Diego Chacin', 'diego@gmail.com', NULL, 9.99, 85.00, NULL, 1, 1, NULL, '2026-01-24 00:20:56', '2026-02-02 15:35:04', 'Diego Chacin_1769214056_diego chacin.jpg', NULL, NULL, NULL, NULL),
+(16, 'Edwards Cedeño', 'Edwars@gmail.com', NULL, 9.99, 86.00, NULL, 1, 2, NULL, '2026-01-24 00:23:58', '2026-02-02 15:35:04', 'Edwards Cedeño_1769214238_edwards cedeño.jpg', NULL, NULL, NULL, NULL),
+(17, 'Ismael Razz', 'ismael@gmail.cpm', NULL, 9.99, 92.00, NULL, 1, 2, NULL, '2026-01-24 00:24:47', '2026-02-02 15:35:04', 'Ismael Razz_1769214287_ismael.jpg', NULL, NULL, NULL, NULL),
+(18, 'Jesus Gonzalez', 'jesusG@GMAIL.COM', NULL, 9.99, 85.00, NULL, 1, 2, NULL, '2026-01-24 00:26:11', '2026-02-02 15:35:04', 'Jesus Gonzalez_1769214371_jesus gonzalez.jpg', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -133,11 +141,20 @@ INSERT INTO `jugadores` (`id_jugador`, `nombre_jugador`, `email_jugador`, `passw
 
 CREATE TABLE `objetivos` (
   `id_objetivo` int(11) NOT NULL,
-  `puntos` int(11) DEFAULT 0,
-  `asistencias` int(11) DEFAULT 0,
-  `rebotes` int(11) DEFAULT 0,
-  `robos` int(11) DEFAULT 0
+  `puntos_o` int(11) DEFAULT 0,
+  `asistencias_o` int(11) DEFAULT 0,
+  `rebotes_o` int(11) DEFAULT 0,
+  `robos_o` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `objetivos`
+--
+
+INSERT INTO `objetivos` (`id_objetivo`, `puntos_o`, `asistencias_o`, `rebotes_o`, `robos_o`) VALUES
+(1, 20, 10, 25, 13),
+(2, 12, 11, 20, 12),
+(3, 45, 23, 10, 10);
 
 -- --------------------------------------------------------
 
@@ -209,8 +226,10 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `password_usuario`, `email_usuario`, `id_universidad_fk`, `id_rol_fk`, `fecha_creacion`, `fecha_actualizacion`, `isActive`) VALUES
 (2, 'gustavo', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'gustavo@gmail.com', 1, 3, '2026-01-19 23:04:49', '2026-01-19 23:04:49', NULL),
-(3, 'pedro', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'pedrogmail.com', 1, 2, '2026-01-20 15:45:05', '2026-01-20 15:45:05', NULL),
-(4, 'Hidalgo', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'hidalgo@gmail.com', 1, 3, '2026-01-23 22:32:58', '2026-01-23 22:32:58', NULL);
+(3, 'pedro', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'pedro@gmail.com', 1, 2, '2026-01-20 15:45:05', '2026-02-03 14:03:23', NULL),
+(4, 'Hidalgo', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'hidalgo@gmail.com', 1, 3, '2026-01-23 22:32:58', '2026-01-23 22:32:58', NULL),
+(5, 'harold', '$2y$10$jScDfAuWczSTaSCWRSG0b.0yY.91MFAAROWptD65OiQrAyEXdhQb6', 'hr13032003e@gmail.com', NULL, 1, '2026-01-23 23:50:53', '2026-01-23 23:50:53', NULL),
+(6, 'cris', '$2y$10$Z3TzVRhR72aepizf9RUlZu1fiCV/1/TvW7d0qbuLdlUHGdaGx3wL2', 'cris@gmail.com', NULL, 1, '2026-02-03 13:41:59', '2026-02-03 13:41:59', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -332,13 +351,13 @@ ALTER TABLE `juegos`
 -- AUTO_INCREMENT de la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `id_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `objetivos`
 --
 ALTER TABLE `objetivos`
-  MODIFY `id_objetivo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_objetivo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `planificacion`
@@ -362,7 +381,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
