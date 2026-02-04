@@ -152,10 +152,16 @@
                 <a href="#"><i class="fas fa-chart-line"></i> Dashboard</a>
             </li>
             <li>
-                <a href="<?php echo $URL . '/client/coordinador/views/universidades/create.php'; ?>"><i class="fas fa-university"></i> Registrar Universidad</a>
+                <a href="<?php echo $URL . '/client/coordinador/views/universidades/index.php'; ?>"><i class="fas fa-university"></i>Universidades</a>
             </li>
             <li>
+                <a href="<?php echo $URL . '/client/coordinador/views/universidades/create.php'; ?>"><i class="fas fa-plus-circle"></i> Registrar Universidad</a>
+            </li>    
+            <li>
                 <a href="<?php echo $URL . '/client/coordinador/views/jugadores/index.php'; ?>"><i class="fas fa-id-card"></i> Ver Jugadores</a>
+            </li>
+                <li>
+                    <a href="<?php echo $URL . '/client/coordinador/views/entrenadores/index.php'; ?>"><i class="fas fa-user-tie"></i> Ver Entrenadores</a>
             </li>
             <li>
                 <a href="<?php echo $URL . '/client/coordinador/views/entrenadores/create.php'; ?>"><i class="fas fa-user-tie"></i> Registrar Entrenadores</a>

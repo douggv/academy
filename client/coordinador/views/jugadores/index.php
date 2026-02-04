@@ -122,6 +122,7 @@
         </div>
 
         <?php foreach ($bloques_universidad as $id_uni => $datos): ?>
+            
             <div class="uni-block">
                 <div class="uni-block-header">
                     <h4 class="bebas"><i class="fas fa-university me-2"></i> <?php echo $datos['nombre']; ?></h4>
@@ -145,10 +146,10 @@
                     <table class="table table-members">
                         <thead>
                             <tr>
-                                <th>Integrante</th>
-                                <th>Posición Táctica</th>
-                                <th>Email de Contacto</th>
-                                <th class="text-end">Ficha</th>
+                                <th>Nombre</th>
+                                <th>Altura</th>
+                                <th>Peso</th>
+                                <th class="text-end">Email</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -158,16 +159,21 @@
                                         <div class="player-tag">
                                             <div class="status-dot"></div>
                                             <strong><?php echo $jugador['nombre_jugador'] ?? 'Sin Nombre'; ?></strong>
-                                        </div>
+                                        </div>      
                                     </td>
                                     <td>
                                         <span class="badge bg-light text-dark border">
-                                            <?php echo $jugador['posicion'] ?? 'Base / Escolta'; ?>
+                                            <?php echo $jugador['altura_jugador'] ?? '---'; ?>
                                         </span>
                                     </td>
-                                    <td class="text-muted small"><?php echo $jugador['email'] ?? 'n/a'; ?></td>
+                                    <td>
+                                        <span class="badge bg-light text-dark border">
+                                            <?php echo $jugador['peso_jugador'] ?? '---'; ?>
+                                        </span>
+                                    </td>
+                                    <td class="text-muted small"><?php echo $jugador['email_jugador'] ?? 'n/a'; ?></td>
                                     <td class="text-end">
-                                        <a href="#" class="btn btn-sm btn-outline-dark">
+                                        <a href="jugador.php?id=<?php echo $jugador['id_jugador']; ?>" class="btn btn-sm btn-outline-dark">
                                             <i class="fas fa-file-invoice"></i> Ver Perfil
                                         </a>
                                     </td>
