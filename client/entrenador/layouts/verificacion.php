@@ -23,7 +23,7 @@
 
         // 1. Usamos un marcador de posición (:email) en lugar de la variable directa
         $sql2 = "SELECT * FROM usuarios WHERE email_usuario = :email";
-
+        
         // 2. Preparamos la consulta
         $query = $pdo->prepare($sql2);
 
@@ -36,9 +36,8 @@
         // 5. Como es un solo usuario, usamos fetch() en lugar de fetchAll() 
         // para acceder directo a los datos sin un bucle foreach adicional.
         $usuarioLogueado = $query->fetch(PDO::FETCH_ASSOC);
-    
-        
+        // guardo el id de la universidad del entrenador logueago 
+        $id_universidad_entrenador = $usuarioLogueado['id_universidad_fk'];        
     }
     
 ?>
-<?php echo $usuarioLogueado['id_universidad_fk']; ?>

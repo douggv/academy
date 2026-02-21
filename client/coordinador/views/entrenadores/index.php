@@ -1,10 +1,9 @@
 <?php include '../../layouts/verificacion.php'; ?>
-
 <?php include '../../layouts/parte1.php'; ?>    
 
 <?php 
 // Consulta para obtener entrenadores y su universidad asignada
-$sql = "SELECT usu.id_usuario, usu.nombre_usuario, usu.email_usuario,  uni.nombre_universidad, uni.imagen as logo_uni 
+$sql = "SELECT usu.id_usuario, usu.nombre_usuario, usu.email_usuario, uni.nombre_universidad, uni.imagen as logo_uni 
         FROM usuarios as usu
         INNER JOIN academias as uni ON usu.id_universidad_fk = uni.id_universidad
         WHERE usu.id_rol_fk = 3 
@@ -49,7 +48,6 @@ $entrenadores = $query->fetchAll(PDO::FETCH_ASSOC);
         color: #1e293b;
     }
 
-    /* Estilo del Logo de la Universidad */
     .uni-logo-sm {
         width: 38px;
         height: 38px;
@@ -94,6 +92,15 @@ $entrenadores = $query->fetchAll(PDO::FETCH_ASSOC);
         font-weight: 600;
         color: #334155;
     }
+
+    /* Estilo adicional para el botón PDF */
+    .btn-pdf {
+        background-color: #dc3545;
+        color: white !important;
+    }
+    .btn-pdf:hover {
+        background-color: #bb2d3b;
+    }
 </style>
 
 <div class="container-fluid">
@@ -102,9 +109,14 @@ $entrenadores = $query->fetchAll(PDO::FETCH_ASSOC);
             <h2 class="bebas mb-0" style="color: var(--admin-dark);">Panel de Entrenadores</h2>
             <p class="text-muted small mb-0">Listado de personal técnico por institución</p>
         </div>
-        <a href="create.php" class="btn btn-dark px-4 shadow-sm">
-            <i class="fas fa-plus me-2"></i> Nuevo Entrenador
-        </a>
+        <div class="d-flex gap-2">
+            <button onclick="generarReporte()" class="btn btn-danger px-4 shadow-sm">
+                <i class="fas fa-file-pdf me-2"></i> Generar Reporte
+            </button>
+            <a href="create.php" class="btn btn-dark px-4 shadow-sm">
+                <i class="fas fa-plus me-2"></i> Nuevo Entrenador
+            </a>
+        </div>
     </div>
 
     <div class="coach-card-container">
@@ -115,7 +127,7 @@ $entrenadores = $query->fetchAll(PDO::FETCH_ASSOC);
                         <th>Entrenador</th>
                         <th>Correo Electrónico</th>
                         <th>Institución Asignada</th>
-                        <th class="text-end">Gestión</th>
+                        <th class="text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -127,12 +139,12 @@ $entrenadores = $query->fetchAll(PDO::FETCH_ASSOC);
                                     <div class="coach-icon">
                                         <i class="fas fa-user-tie"></i>
                                     </div>
-                                    <span class="fw-bold"><?php echo $coach['nombre_usuario']; ?></span>
+                                    <span class="fw-bold"><?php echo htmlspecialchars($coach['nombre_usuario']); ?></span>
                                 </div>
                             </td>
                             <td>
                                 <a href="mailto:<?php echo $coach['email_usuario']; ?>" class="email-link">
-                                    <i class="far fa-envelope me-2"></i><?php echo $coach['email_usuario']; ?>
+                                    <i class="far fa-envelope me-2"></i><?php echo htmlspecialchars($coach['email_usuario']); ?>
                                 </a>
                             </td>
                             <td>
@@ -145,20 +157,17 @@ $entrenadores = $query->fetchAll(PDO::FETCH_ASSOC);
                                             <i class="fas fa-university text-muted" style="font-size: 0.7rem;"></i>
                                         </div>
                                     <?php endif; ?>
-                                    <span><?php echo $coach['nombre_universidad']; ?></span>
+                                    <span><?php echo htmlspecialchars($coach['nombre_universidad']); ?></span>
                                 </div>
                             </td>
-                            <td class="text-end">
-                                <div class="btn-group">
-                                    <a href="update.php?id=<?php echo $coach['id_usuario']; ?>" 
-                                       class="btn btn-sm btn-outline-primary border-0">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <button class="btn btn-sm btn-outline-danger border-0">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </div>
+                            <td class="text-center">
+                                <a href="update.php?id=<?php echo $coach['id_usuario']; ?>" class="btn btn-outline-warning btn-sm border-0">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="update.php?id=<?php echo $coach['id_usuario']; ?>" class="btn btn-outline-danger btn-sm border-0">
+                                    <i class="fas fa-trash"></i>
                             </td>
+
                         </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -175,12 +184,75 @@ $entrenadores = $query->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <script>
-    // Pequeño script opcional para confirmar eliminación
+    // Confirmación de eliminación
     document.querySelectorAll('.btn-outline-danger').forEach(button => {
         button.onclick = (e) => {
-            if(!confirm('¿Está seguro de que desea retirar a este entrenador del sistema?')) e.preventDefault();
+            if(!confirm('¿Está seguro de que desea retirar a este entrenador del sistema?')) {
+                e.preventDefault();
+            }
         }
     });
+</script>
+
+
+<style>
+/* Estilos especiales para cuando se imprima */
+@media print {
+    /* Ocultar elementos innecesarios (ajusta las clases según tu layout) */
+    .btn, .main-sidebar, .main-footer, .nav, .navbar, .acciones-col {
+        display: none !important;
+    }
+
+    /* Ajustar el contenedor para que use toda la hoja */
+    .content-wrapper, .container-fluid {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    .coach-card-container {
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Forzar que la tabla se vea bien */
+    .table-coach {
+        width: 100% !important;
+        border: 1px solid #000 !important;
+    }
+    
+    .table-coach th {
+        background-color: #f1f5f9 !important;
+        color: #000 !important;
+        -webkit-print-color-adjust: exact;
+    }
+
+    /* Añadir un título que solo aparezca en la impresión */
+    .print-header {
+        display: block !important;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}
+
+/* Ocultar el título de impresión en la pantalla normal */
+.print-header {
+    display: none;
+}
+</style>
+
+<script>
+function generarReporte() {
+    // 1. Opcional: Cambiar el título del documento para el nombre del archivo
+    const originalTitle = document.title;
+    document.title = "Reporte_Entrenadores_<?php echo date('d-m-Y'); ?>";
+
+    // 2. Ejecutar la ventana de impresión/PDF del navegador
+    window.print();
+
+    // 3. Restaurar el título
+    document.title = originalTitle;
+}
 </script>
 
 <?php include '../../layouts/parte2.php'; ?>

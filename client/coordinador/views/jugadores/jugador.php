@@ -131,7 +131,7 @@
     <div class="scouting-card">
         <div class="scouting-header">
             <div class="img-container">
-                <?php if (!empty($jugador['imagen'])): ?>
+                <?php if (!empty($jugador['imagen_jugador'])): ?>
                     <img src="<?php echo $URL; ?>/client/assets/img/jugadores/<?php echo $jugador['imagen_jugador']; ?>" alt="Foto Jugador">
                 <?php else: ?>
                     <div class="h-100 d-flex align-items-center justify-content-center">

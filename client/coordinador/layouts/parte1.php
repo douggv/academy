@@ -11,6 +11,8 @@
     <title>Panel Coach - Basketball Academy</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="../../../public/assets/img/logoBasquet2.png" type="image/png">
+
 <style>
     :root {
         /* Paleta Profesional/Administrativa */
@@ -149,7 +151,7 @@
 
         <ul class="list-unstyled components">
             <li class="active">
-                <a href="#"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="<?php echo $URL . '/client/coordinador/views/index.php'; ?>"><i class="fas fa-chart-line"></i> Dashboard</a>
             </li>
             <li>
                 <a href="<?php echo $URL . '/client/coordinador/views/universidades/index.php'; ?>"><i class="fas fa-university"></i>Universidades</a>

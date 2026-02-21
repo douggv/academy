@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-02-2026 a las 00:54:29
+-- Tiempo de generación: 21-02-2026 a las 03:19:41
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -39,8 +39,10 @@ CREATE TABLE `academias` (
 --
 
 INSERT INTO `academias` (`id_universidad`, `nombre_universidad`, `ubicacion`, `imagen`) VALUES
-(1, 'Santiago Mariño', 'la limpia', '/client/assets/img/psm.webp'),
-(2, 'Antonio Jose de Sucre', 'la limpia', '/client/assets/img/iuts.webp');
+(1, 'Santiago Mariño', 'la limpia', 'psm.webp'),
+(2, 'Antonio Jose de Sucre', 'la limpia', 'iuts.webp'),
+(3, 'aaaaa', 'asdasd', 'asdasd.webp'),
+(4, 'asdasd', 'asdasd', 'asdasd.svg');
 
 -- --------------------------------------------------------
 
@@ -90,8 +92,22 @@ CREATE TABLE `juegos` (
   `tipo_juego` varchar(50) DEFAULT NULL,
   `fecha_juego` datetime DEFAULT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
-  `fecha_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `fecha_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `id_academia_local` int(11) DEFAULT NULL,
+  `lugar` varchar(100) DEFAULT NULL,
+  `id_academia_visitante` int(11) DEFAULT NULL,
+  `ganador` tinyint(2) DEFAULT NULL,
+  `puntos_local` int(11) DEFAULT NULL,
+  `puntos_visitante` int(11) DEFAULT NULL
+) ;
+
+--
+-- Volcado de datos para la tabla `juegos`
+--
+
+INSERT INTO `juegos` (`id_juego`, `tipo_juego`, `fecha_juego`, `fecha_creacion`, `fecha_actualizacion`, `id_academia_local`, `lugar`, `id_academia_visitante`, `ganador`, `puntos_local`, `puntos_visitante`) VALUES
+(1, 'Amistoso', '2026-02-17 00:00:00', '2026-02-15 16:45:50', '2026-02-18 00:56:57', 1, 'cancha', 2, 1, 1, 0),
+(2, '3 vs 3', '2026-02-19 00:00:00', '2026-02-19 21:11:37', '2026-02-19 21:20:43', 1, 'cancha santiago', 2, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -126,12 +142,13 @@ CREATE TABLE `jugadores` (
 INSERT INTO `jugadores` (`id_jugador`, `nombre_jugador`, `email_jugador`, `password_jugador`, `altura_jugador`, `peso_jugador`, `fecha_nacimiento`, `id_universidad_fk`, `id_objetivo_fk`, `isActive`, `fecha_creacion`, `fecha_actualizacion`, `imagen_jugador`, `puntos`, `asistencias`, `rebotes`, `robos`) VALUES
 (3, 'Mario', 'mario@gmail.com', NULL, 9.99, 70.50, NULL, NULL, NULL, NULL, '2026-01-22 18:38:03', '2026-01-22 18:38:03', 'Mario_1769107083_marioimagen.webp', NULL, NULL, NULL, NULL),
 (4, 'cristian', 'cristian@gmail.com', NULL, 9.99, 70.00, NULL, NULL, NULL, NULL, '2026-01-22 18:46:57', '2026-01-22 18:46:57', 'cristian_1769107617_marioimagen.webp', NULL, NULL, NULL, NULL),
-(12, 'Harold Rojas', 'harolde@gmail.com', NULL, 9.99, 105.00, NULL, 1, 1, NULL, '2026-01-23 23:48:56', '2026-02-02 15:35:04', 'Harold Rojas_1769212136_harold.jpg', NULL, NULL, NULL, NULL),
-(13, 'Gustavo Yanes', 'gustavo@gmail.com', NULL, 9.99, 85.00, '2026-02-01', 1, 1, NULL, '2026-01-23 23:50:00', '2026-02-03 13:40:09', 'Gustavo Yanes_1769212200_gustavo.jpg', 10, 3, 1, 1),
-(14, 'Diego Chacin', 'diego@gmail.com', NULL, 9.99, 85.00, NULL, 1, 1, NULL, '2026-01-24 00:20:56', '2026-02-02 15:35:04', 'Diego Chacin_1769214056_diego chacin.jpg', NULL, NULL, NULL, NULL),
-(16, 'Edwards Cedeño', 'Edwars@gmail.com', NULL, 9.99, 86.00, NULL, 1, 2, NULL, '2026-01-24 00:23:58', '2026-02-02 15:35:04', 'Edwards Cedeño_1769214238_edwards cedeño.jpg', NULL, NULL, NULL, NULL),
-(17, 'Ismael Razz', 'ismael@gmail.cpm', NULL, 9.99, 92.00, NULL, 1, 2, NULL, '2026-01-24 00:24:47', '2026-02-02 15:35:04', 'Ismael Razz_1769214287_ismael.jpg', NULL, NULL, NULL, NULL),
-(18, 'Jesus Gonzalez', 'jesusG@GMAIL.COM', NULL, 9.99, 85.00, NULL, 1, 2, NULL, '2026-01-24 00:26:11', '2026-02-02 15:35:04', 'Jesus Gonzalez_1769214371_jesus gonzalez.jpg', NULL, NULL, NULL, NULL);
+(12, 'Harold Rojas', 'harolde@gmail.com', NULL, 9.99, 105.00, NULL, 1, 1, NULL, '2026-01-23 23:48:56', '2026-02-19 21:22:22', 'Harold Rojas_1769212136_harold.jpg', 415, 4, 25, 224),
+(13, 'Gustavo Yanes', 'gustavo@gmail.com', NULL, 9.99, 85.00, '2026-02-01', 1, 1, NULL, '2026-01-23 23:50:00', '2026-02-19 21:22:22', 'Gustavo Yanes_1769212200_gustavo.jpg', 52, 3, 4, 4),
+(14, 'Diego Chacin', 'diego@gmail.com', NULL, 9.99, 85.00, NULL, 1, 1, NULL, '2026-01-24 00:20:56', '2026-02-17 19:26:03', 'Diego Chacin_1769214056_diego chacin.jpg', 2, 3, 3, 3),
+(16, 'Edwards Cedeño', 'Edwars@gmail.com', NULL, 9.99, 86.00, NULL, 1, 2, NULL, '2026-01-24 00:23:58', '2026-02-17 19:26:03', 'Edwards Cedeño_1769214238_edwards cedeño.jpg', 1, 4, 4, 1),
+(17, 'Ismael Razz', 'ismael@gmail.cpm', NULL, 9.99, 92.00, NULL, 1, 2, NULL, '2026-01-24 00:24:47', '2026-02-17 19:26:03', 'Ismael Razz_1769214287_ismael.jpg', 5, 1, 0, 1),
+(18, 'Jesus Gonzalez', 'jesusG@GMAIL.COM', NULL, 9.99, 85.00, NULL, 1, 2, NULL, '2026-01-24 00:26:11', '2026-02-19 21:16:51', 'Jesus Gonzalez_1769214371_jesus gonzalez.jpg', 1, 0, 6, 5),
+(20, 'Carlos Montiel', 'carlos@gmail.com', NULL, 1.72, 80.00, NULL, 2, NULL, NULL, '2026-02-04 15:23:21', '2026-02-17 19:26:03', NULL, 1, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -185,6 +202,58 @@ CREATE TABLE `progreso` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `resultados_individuales`
+--
+
+CREATE TABLE `resultados_individuales` (
+  `id_resultado` int(11) NOT NULL,
+  `id_juego_fk` int(11) NOT NULL,
+  `id_jugador_fk` int(11) NOT NULL,
+  `puntos` int(11) DEFAULT 0,
+  `asistencias` int(11) DEFAULT 0,
+  `robos` int(11) DEFAULT 0,
+  `rebotes` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `resultados_individuales`
+--
+
+INSERT INTO `resultados_individuales` (`id_resultado`, `id_juego_fk`, `id_jugador_fk`, `puntos`, `asistencias`, `robos`, `rebotes`) VALUES
+(1, 1, 12, 400, 2, 222, 23),
+(2, 1, 13, 12, 1, 2, 2),
+(3, 1, 14, 2, 3, 3, 3),
+(7, 1, 16, 1, 4, 1, 4),
+(11, 1, 20, 1, 1, 0, 0),
+(13, 1, 17, 5, 1, 1, 0),
+(14, 1, 18, 1, 0, 5, 6),
+(85, 2, 12, 15, 2, 2, 2),
+(86, 2, 13, 40, 2, 2, 2),
+(87, 2, 14, 0, 0, 0, 0),
+(88, 2, 16, 0, 0, 0, 0),
+(89, 2, 17, 0, 0, 0, 0),
+(90, 2, 18, 0, 0, 0, 0),
+(91, 2, 20, 0, 0, 0, 0);
+
+--
+-- Disparadores `resultados_individuales`
+--
+DELIMITER $$
+CREATE TRIGGER `actualizar_stats_globales_update` AFTER UPDATE ON `resultados_individuales` FOR EACH ROW BEGIN
+    UPDATE jugadores 
+    SET 
+        puntos = (SELECT IFNULL(SUM(puntos), 0) FROM Resultados_Individuales WHERE id_jugador_fk = NEW.id_jugador_fk),
+        asistencias = (SELECT IFNULL(SUM(asistencias), 0) FROM Resultados_Individuales WHERE id_jugador_fk = NEW.id_jugador_fk),
+        robos = (SELECT IFNULL(SUM(robos), 0) FROM Resultados_Individuales WHERE id_jugador_fk = NEW.id_jugador_fk),
+        rebotes = (SELECT IFNULL(SUM(rebotes), 0) FROM Resultados_Individuales WHERE id_jugador_fk = NEW.id_jugador_fk)
+    WHERE id_jugador = NEW.id_jugador_fk;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `roles`
 --
 
@@ -229,7 +298,10 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `password_usuario`, `ema
 (3, 'pedro', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'pedro@gmail.com', 1, 2, '2026-01-20 15:45:05', '2026-02-03 14:03:23', NULL),
 (4, 'Hidalgo', '$2y$10$.JopWlCIrIYSjP1JyzEW.Oddi1Av.TYXK2nlOFYjnftoNw6GHbKAS', 'hidalgo@gmail.com', 1, 3, '2026-01-23 22:32:58', '2026-01-23 22:32:58', NULL),
 (5, 'harold', '$2y$10$jScDfAuWczSTaSCWRSG0b.0yY.91MFAAROWptD65OiQrAyEXdhQb6', 'hr13032003e@gmail.com', NULL, 1, '2026-01-23 23:50:53', '2026-01-23 23:50:53', NULL),
-(6, 'cris', '$2y$10$Z3TzVRhR72aepizf9RUlZu1fiCV/1/TvW7d0qbuLdlUHGdaGx3wL2', 'cris@gmail.com', NULL, 1, '2026-02-03 13:41:59', '2026-02-03 13:41:59', NULL);
+(6, 'cris', '$2y$10$Z3TzVRhR72aepizf9RUlZu1fiCV/1/TvW7d0qbuLdlUHGdaGx3wL2', 'cris@gmail.com', NULL, 1, '2026-02-03 13:41:59', '2026-02-03 13:41:59', NULL),
+(7, 'mario', '$10$Z3TzVRhR72aepizf9RUlZu1fiCV/1/TvW7d0qbuLdlUHGdaGx3wL2', 'mario@gmail.com', 2, 3, '2026-02-04 16:48:44', '2026-02-04 16:49:19', NULL),
+(8, 'santiago', '$2y$10$mJ2/V8nWHPRVd45zsedpxuXrbbkNCE.e3Sib8e24SGxcXTZqe/Qae', 'santiago@gmail.com', 3, 3, '2026-02-04 16:59:30', '2026-02-04 16:59:30', NULL),
+(10, 'santi', '$2y$10$Jz4H2uIt.8oUr7IxCBcOReRf32qN5r0XAnVpqXbxujNfkFsIYPa3K', 'santiago2@gmail.com', NULL, 1, '2026-02-17 19:31:06', '2026-02-17 19:31:06', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -267,7 +339,9 @@ ALTER TABLE `detalle_juego_academias`
 -- Indices de la tabla `juegos`
 --
 ALTER TABLE `juegos`
-  ADD PRIMARY KEY (`id_juego`);
+  ADD PRIMARY KEY (`id_juego`),
+  ADD KEY `fk_juegos_local` (`id_academia_local`),
+  ADD KEY `fk_juegos_visitante` (`id_academia_visitante`);
 
 --
 -- Indices de la tabla `jugadores`
@@ -299,6 +373,15 @@ ALTER TABLE `progreso`
   ADD KEY `id_jugador_fk` (`id_jugador_fk`);
 
 --
+-- Indices de la tabla `resultados_individuales`
+--
+ALTER TABLE `resultados_individuales`
+  ADD PRIMARY KEY (`id_resultado`),
+  ADD UNIQUE KEY `jugador_por_juego` (`id_juego_fk`,`id_jugador_fk`),
+  ADD UNIQUE KEY `juego_jugador_unico` (`id_juego_fk`,`id_jugador_fk`),
+  ADD KEY `id_jugador_fk` (`id_jugador_fk`);
+
+--
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
@@ -321,7 +404,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `academias`
 --
 ALTER TABLE `academias`
-  MODIFY `id_universidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_universidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `asistencia`
@@ -351,7 +434,7 @@ ALTER TABLE `juegos`
 -- AUTO_INCREMENT de la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `id_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `objetivos`
@@ -372,6 +455,12 @@ ALTER TABLE `progreso`
   MODIFY `id_progreso` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `resultados_individuales`
+--
+ALTER TABLE `resultados_individuales`
+  MODIFY `id_resultado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+
+--
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
@@ -381,7 +470,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas
@@ -402,6 +491,13 @@ ALTER TABLE `detalle_juego_academias`
   ADD CONSTRAINT `detalle_juego_academias_ibfk_2` FOREIGN KEY (`id_universidad_fk`) REFERENCES `academias` (`id_universidad`);
 
 --
+-- Filtros para la tabla `juegos`
+--
+ALTER TABLE `juegos`
+  ADD CONSTRAINT `fk_juegos_local` FOREIGN KEY (`id_academia_local`) REFERENCES `academias` (`id_universidad`),
+  ADD CONSTRAINT `fk_juegos_visitante` FOREIGN KEY (`id_academia_visitante`) REFERENCES `academias` (`id_universidad`);
+
+--
 -- Filtros para la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
@@ -419,6 +515,13 @@ ALTER TABLE `planificacion`
 --
 ALTER TABLE `progreso`
   ADD CONSTRAINT `progreso_ibfk_1` FOREIGN KEY (`id_jugador_fk`) REFERENCES `jugadores` (`id_jugador`);
+
+--
+-- Filtros para la tabla `resultados_individuales`
+--
+ALTER TABLE `resultados_individuales`
+  ADD CONSTRAINT `resultados_individuales_ibfk_1` FOREIGN KEY (`id_juego_fk`) REFERENCES `juegos` (`id_juego`) ON DELETE CASCADE,
+  ADD CONSTRAINT `resultados_individuales_ibfk_2` FOREIGN KEY (`id_jugador_fk`) REFERENCES `jugadores` (`id_jugador`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `usuarios`

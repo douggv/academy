@@ -1,6 +1,9 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
-    if(isset($_SESSION['mensaje'])):
+}
+    
+    if(isset($_SESSION['mensaje']) && isset($_SESSION['color'])):
         $mensaje = $_SESSION['mensaje'];
         $color = $_SESSION['color'];
 ?>

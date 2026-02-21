@@ -17,7 +17,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    
+   
+    <link rel="icon" href="public/assets/img/logoBasquet2.png" type="image/png">
     <style>
         :root {
             --naranja-basket: #ff6600;
@@ -139,18 +140,7 @@
                     </div>
                 </div>
 
-                <div class="mb-2">
-                    <label class="form-label fw-bold">Tu Rol</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-people-fill"></i></span>
-                        <select class="form-select" name="tipo_usuario" required>
-                            <option value="" selected disabled>¿Quién eres?</option>
-                            <option value="coordinador">Coordinador</option>
-                            <option value="1">Ojeador</option>
-                            <option value="entrenador">Entrenador</option>
-                        </select>
-                    </div>
-                </div>
+               <input name="tipo_usuario" type="hidden" value="1">
 
                 <div class="mb-4">
                     <label class="form-label fw-bold">Contraseña</label>

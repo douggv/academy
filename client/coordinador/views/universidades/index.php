@@ -112,7 +112,7 @@
                     <tr>
                         <td width="80">
                             <?php if (!empty($uni['imagen'])): ?>
-                                <img src="<?php echo $URL; ?><?php echo $uni['imagen']; ?>" 
+                                <img src="<?php echo $URL; ?>/public/images/universidades/<?php echo $uni['imagen']; ?>" 
                                      alt="Logo" class="uni-logo-circle">
                             <?php else: ?>
                                 <div class="uni-logo-circle d-flex align-items-center justify-content-center bg-light">

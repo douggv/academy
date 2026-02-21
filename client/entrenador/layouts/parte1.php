@@ -11,6 +11,8 @@
     <title>Panel Coach - Basketball Academy</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="../../../public/assets/img/logoBasquet2.png" type="image/png">
+    
     <style>
         :root {
             --naranja-basket: #ff6600;
@@ -97,7 +99,7 @@
                 <a href="#"><i class="fas fa-calendar-check"></i> Registrar Asistencia</a>
             </li>
             <li>
-                <a href="#"><i class="fas fa-trophy"></i> Agregar a Torneos</a>
+                <a href="<?php echo $URL . '/client/entrenador/views/torneos/index.php'; ?>"><i class="fas fa-trophy"></i> Ver Torneos</a>
             </li>
         </ul>
 

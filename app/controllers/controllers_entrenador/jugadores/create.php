@@ -1,40 +1,50 @@
 <?php
 include '../../../config.php';
+session_start(); // Iniciamos sesión al principio para evitar errores de headers
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nombre_jugador = $_POST['nombre_jugador'];
-    $email_jugador = $_POST['email_jugador'];
+    $nombre_jugador = trim($_POST['nombre_jugador']);
+    $email_jugador = trim($_POST['email_jugador']);
     $altura_jugador = $_POST['altura_jugador'];
     $peso_jugador = $_POST['peso_jugador'];
     $id_universidad_fk = $_POST['id_universidad_fk'];
 
-    // 1. VERIFICAR SI EL CORREO YA EXISTE
-    $sql_check = "SELECT id_jugador FROM jugadores WHERE email_jugador = :email LIMIT 1";
+    // 1. VERIFICAR SI EL CORREO O EL NOMBRE (EN ESA UNI) YA EXISTEN
+    $sql_check = "SELECT id_jugador FROM jugadores 
+                  WHERE email_jugador = :email 
+                  OR (nombre_jugador = :nombre AND id_universidad_fk = :id_uni) 
+                  LIMIT 1";
+    
     $query_check = $pdo->prepare($sql_check);
     $query_check->bindParam(':email', $email_jugador);
+    $query_check->bindParam(':nombre', $nombre_jugador);
+    $query_check->bindParam(':id_uni', $id_universidad_fk);
     $query_check->execute();
 
     if ($query_check->rowCount() > 0) {
-        // El correo ya existe, enviamos error
-        session_start();
-        $_SESSION['mensaje'] = 'El correo electrónico ya está registrado';
-        $_SESSION['color'] = 'error';
+        $_SESSION['mensaje'] = 'El jugador o el correo ya se encuentran registrados en esta academia';
+        $_SESSION['color'] = 'alert alert-warning';
         header('Location: ' . $URL . '/client/entrenador/views/jugadores/create.php');
         exit();
     }
 
-    // 2. MANEJAR LA SUBIDA DE IMAGEN (Si el correo no existe, procedemos)
+    // 2. MANEJAR LA SUBIDA DE IMAGEN
+    $imagen_para_db = 'default.png'; // Valor por defecto
+
     if (isset($_FILES['imagen_jugador']) && $_FILES['imagen_jugador']['error'] == 0) {
-        $imagen_nombre = $nombre_jugador . '_' . time() . '_' . $_FILES['imagen_jugador']['name'];
+        // Limpiamos el nombre para el archivo
+        $nombre_limpio = str_replace(' ', '_', $nombre_jugador);
+        $imagen_nombre = $nombre_limpio . '_' . time() . '.jpg'; 
         $directorio_destino = __DIR__ . "/../../../../client/assets/img/jugadores/";
 
-        if (move_uploaded_file($_FILES['imagen_jugador']['tmp_name'], $directorio_destino . $imagen_nombre)) {
-            $imagen_para_db = $imagen_nombre; // Guardamos solo el nombre para ser consistente con tu bindParam
-        } else {
-            $imagen_para_db = 'default.png';
+        // Crear directorio si no existe
+        if (!is_dir($directorio_destino)) {
+            mkdir($directorio_destino, 0777, true);
         }
-    } else {
-        $imagen_para_db = 'default.png';
+
+        if (move_uploaded_file($_FILES['imagen_jugador']['tmp_name'], $directorio_destino . $imagen_nombre)) {
+            $imagen_para_db = $imagen_nombre;
+        }
     }
 
     // 3. PREPARAR E INSERTAR
@@ -50,15 +60,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $query->bindParam(':id_universidad_fk', $id_universidad_fk);
 
     if ($query->execute()) {
-        session_start();
         $_SESSION['mensaje'] = 'jugador_creado';
-        $_SESSION['color'] = 'success';
+        $_SESSION['color'] = 'alert alert-success';
         header('Location: ' . $URL . '/client/entrenador/views/jugadores/index.php');
         exit();
     } else {
-        session_start();
         $_SESSION['mensaje'] = 'Error al crear el registro';
-        $_SESSION['color'] = 'error';
+        $_SESSION['color'] = 'alert alert-danger';
         header('Location: ' . $URL . '/client/entrenador/views/jugadores/create.php');
         exit();
     }
@@ -66,4 +74,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Location: ' . $URL . '/client/entrenador/views/jugadores/create.php');
     exit();
 }
-?>

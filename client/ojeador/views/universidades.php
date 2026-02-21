@@ -66,7 +66,7 @@
                 <div class="card h-100 shadow-sm border-0" style="border-top: 4px solid var(--naranja-basket) !important;">
                     
                     <div class="text-center p-3">
-                        <img src="<?php echo $URL; ?><?php echo $uni['imagen']; ?>" 
+                        <img src="<?php echo $URL; ?>/public/images/universidades/<?php echo $uni['imagen']; ?>" 
                              class="card-img-top img-fluid" 
                              alt="<?php echo htmlspecialchars($uni['nombre_universidad']); ?>"
                              style="max-height: 150px; object-fit: contain;">
