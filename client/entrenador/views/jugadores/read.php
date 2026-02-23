@@ -38,7 +38,7 @@ if (!$jugadores) {
                     <div class="row">
                         <div class="col-md-4 text-center">
                             <?php if(!empty($jugadores['imagen_jugador'])): ?>
-                                <img src="<?php echo $URL."/public/images/jugadores/".$jugadores['imagen_jugador']; ?>" 
+                                <img src="<?php echo $URL; ?>/client/assets/img/jugadores/<?php echo $jugadores['imagen_jugador']; ?>" 
                                      class="img-fluid rounded border shadow-sm mb-3">
                             <?php else: ?>
                                 <i class="bi bi-person-circle text-muted" style="font-size: 6rem;"></i>

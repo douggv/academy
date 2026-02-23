@@ -147,6 +147,7 @@
                             <option value="2">Coordinador</option>
                             <option value="1">Ojeador</option>
                             <option value="3">Entrenador</option>
+
                         </select>
                     </div>
                 </div>
@@ -170,9 +171,11 @@
                 <p class="mb-2"><a href="recuperar.php">¿Olvidaste tu contraseña?</a></p>
                 <p class="mb-2">¿Eres nuevo? <a href="register.php">Crea tu cuenta</a></p>
                 <p class="mt-3 pt-2 border-top">
-                    <a href="login.php" class="text-muted small">
+                    <a href="index.php" class="text-muted small">
                         <i class="bi bi-arrow-left-circle me-1"></i>Regresar al inicio
                     </a>
+                    <p class="mb-0 small text-muted"></p>
+                    <a href="login_jugador.php" class="text-muted small">Eres jugador?</a>
                 </p>
             </div>
         </div>

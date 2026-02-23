@@ -55,7 +55,7 @@ include '../../layouts/parte1.php';
                                 <label class="form-label fw-bold">Foto Actual</label>
                                 <div class="mb-2">
                                     <?php if(!empty($jugador['imagen_jugador'])): ?>
-                                        <img src="<?php echo $URL."/public/images/jugadores/".$jugador['imagen_jugador']; ?>" width="100" class="img-thumbnail">
+                                        <img src="<?php echo $URL; ?>/client/assets/img/jugadores/<?php echo $jugador['imagen_jugador']; ?>" width="100" class="img-thumbnail">
                                     <?php else: ?>
                                         <i class="bi bi-person-square text-muted" style="font-size: 3rem;"></i>
                                     <?php endif; ?>
@@ -68,8 +68,15 @@ include '../../layouts/parte1.php';
                         <div class="row mt-3">
                             <div class="col-md-4 mb-3">
                                 <label class="form-label fw-bold">Altura (cm)</label>
-                                <input type="number" name="altura_jugador" class="form-control" 
-                                       value="<?php echo $jugador['altura_jugador']; ?>" required>
+                                <input type="text" 
+                                    name="altura_jugador" 
+                                    class="form-control" 
+                                    value="<?php echo $jugador['altura_jugador']; ?>" 
+                                    pattern="^[0-9,]+$" 
+                                    title="Solo se permiten números y comas (,)" 
+                                    oninput="this.value = this.value.replace(/[^0-9,]/g, '')"
+                                    required>
+                                <div class="form-text text-muted">Use solo números y comas.</div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label class="form-label fw-bold">Peso (kg)</label>
@@ -82,28 +89,8 @@ include '../../layouts/parte1.php';
                                        value="<?php echo $jugador['fecha_nacimiento']; ?>" required>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label class="form-label fw-bold">Puntos</label>
-                                <input type="number" name="puntos" class="form-control"
-                                        value="<?php echo $jugador['puntos']; ?>" required>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label class="form-label fw-bold">Asistencias</label>
-                                <input type="number" name="asistencias" class="form-control"
-                                        value="<?php echo $jugador['asistencias']; ?>" required>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label class="form-label fw-bold">Rebotes</label>
-                                <input type="number" name="rebotes" class="form-control"
-                                        value="<?php echo $jugador['rebotes']; ?>" required>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label class="form-label fw-bold">Robos</label>
-                                <input type="number" name="robos" class="form-control"
-                                        value="<?php echo $jugador['robos']; ?>" required>
-                            </div>
-                        </div>
+                        
+                       
 
                         <hr>
                         <div class="d-flex justify-content-end gap-2">

@@ -10,8 +10,10 @@
     $query->execute();
     $usuarios = $query->fetchAll(PDO::FETCH_ASSOC);
     $contador = 0;
+
+
+    
     foreach ($usuarios as $usuario) {
-        $rol = $usuario['id_rol_fk'];
         $passwod_tabla = $usuario['password_usuario'];
         if (password_verify($password, $passwod_tabla)) {
             $contador = $contador + 1;

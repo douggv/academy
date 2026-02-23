@@ -85,22 +85,23 @@
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
         </div>
         <div class="carousel-inner">
-            <div class="carousel-item active" style="background-image: url('https://images.unsplash.com/photo-1519861531473-9200362f46b3?q=80&w=1471&auto=format&fit=crop');">
+            <div class="carousel-item active" style="background-image: url('https://images.unsplash.com/photo-1515523110800-9415d13b84a8?q=80&w=1374&auto=format&fit=crop');">
                 <div class="carousel-caption">
                     <h2>Entrena como un Profesional</h2>
-                    <p>Contamos con entrenadores certificados por la FIBA para llevar tu juego al siguiente nivel.</p>
-                </div>
-            </div>
-            <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=1490&auto=format&fit=crop');">
-                <div class="carousel-caption">
-                    <h2>Scouting y Ojeadores</h2>
                     <p>Nuestra plataforma conecta talentos con universidades y clubes profesionales.</p>
                 </div>
             </div>
+                <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=1490&auto=format&fit=crop');">
+                    <div class="carousel-caption">
+                        <h2>Scouting y Ojeadores</h2>
+                        <p>Nuestra plataforma conecta talentos con universidades y clubes profesionales.</p>
+                    </div>
+                </div>
+            
             <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1515523110800-9415d13b84a8?q=80&w=1374&auto=format&fit=crop');">
                 <div class="carousel-caption">
                     <h2>Torneos y Competencias</h2>
-                    <p>Participa en ligas locales e internacionales con el equipo de <?php echo APP_NAME; ?>.</p>
+                    <p><i class="bi bi-trophy me-2"></i> <?php echo APP_NAME; ?> organiza torneos regionales e internacionales para desarrollar el talento.</p>
                 </div>
             </div>
         </div>
@@ -116,9 +117,8 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <h2 class="title-section">Sobre Nosotros</h2>
-                <p>En **<?php echo APP_NAME; ?>**, no solo formamos jugadores de baloncesto; formamos líderes. Fundada en 2010, nuestra academia ha sido el punto de partida para más de 500 atletas que ahora compiten en niveles colegiales y profesionales.</p>
-                <p>Nuestra metodología combina el desarrollo técnico individual con la inteligencia táctica en equipo.</p>
-                <button class="btn btn-dark btn-lg">Leer más</button>
+                <p>En **<?php echo APP_NAME; ?>**, Una plataforma que conecta talentos con universidades y clubes profesionales de baloncesto.</p>
+                <a href="login.php" class="btn btn-dark btn-lg">Leer más</a>
             </div>
             <div class="col-md-6">
                 <img src="https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=1469&auto=format&fit=crop" alt="baloncesto" class="img-fluid rounded shadow shadow-lg">
@@ -128,7 +128,7 @@
 
     <section id="servicios" class="bg-light section-padding">
         <div class="container text-center">
-            <h2 class="title-section">Lo que ofrecemos</h2>
+            <h2 class="title-section">Proximamente!!</h2>
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <div class="p-4 bg-white rounded shadow-sm">

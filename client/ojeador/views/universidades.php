@@ -96,3 +96,6 @@
         <?php endforeach; ?>
     </div>
 </section>
+
+
+<?php include '../layouts/parte2.php'; ?>

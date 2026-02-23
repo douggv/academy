@@ -48,7 +48,7 @@
                                 <label class="form-label fw-bold">Foto Actual</label>
                                 <div class="p-2 border rounded bg-light">
                                     <?php if(!empty($jugadores['imagen_jugador'])): ?>
-                                        <img src="<?php echo $URL."/public/images/jugadores/".$jugadores['imagen_jugador']; ?>" width="100%" class="img-fluid rounded">
+                                        <img src="<?php echo $URL; ?>/client/assets/img/jugadores/<?php echo $jugadores['imagen_jugador']; ?>" width="100%" class="img-fluid rounded">
                                     <?php else: ?>
                                         <i class="bi bi-person-bounding-box" style="font-size: 3rem;"></i>
                                     <?php endif; ?>

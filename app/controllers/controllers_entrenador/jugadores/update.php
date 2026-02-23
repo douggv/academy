@@ -7,10 +7,7 @@ $email_jugador = $_POST['email_jugador'];
 $altura_jugador = $_POST['altura_jugador'];
 $peso_jugador = $_POST['peso_jugador'];
 $fecha_nacimiento = $_POST['fecha_nacimiento'];
-$puntos = $_POST['puntos'];
-$asistencias = $_POST['asistencias'];
-$rebotes = $_POST['rebotes'];
-$robos = $_POST['robos'];
+
 // 1. Manejo de la Imagen
 if ($_FILES['imagen_jugador']['name'] != null) {
     // Si subió una foto nueva, borramos la anterior
@@ -42,11 +39,7 @@ $sentencia = $pdo->prepare("UPDATE jugadores
         imagen_jugador = :imagen, 
         altura_jugador = :altura, 
         peso_jugador = :peso, 
-        fecha_nacimiento = :fecha,
-        puntos = :puntos,
-        asistencias = :asistencias,
-        rebotes = :rebotes,
-        robos = :robos 
+        fecha_nacimiento = :fecha
     WHERE id_jugador = :id_jugador");
 
 $sentencia->bindParam(':nombre', $nombre_jugador);
@@ -56,19 +49,16 @@ $sentencia->bindParam(':altura', $altura_jugador);
 $sentencia->bindParam(':peso', $peso_jugador);
 $sentencia->bindParam(':fecha', $fecha_nacimiento);
 $sentencia->bindParam(':id_jugador', $id_jugador);
-$sentencia->bindParam(':puntos', $puntos);
-$sentencia->bindParam(':asistencias', $asistencias);
-$sentencia->bindParam(':rebotes', $rebotes);
-$sentencia->bindParam(':robos', $robos);
+
 
 if ($sentencia->execute()) {
     session_start();
     $_SESSION['mensaje'] = "Se actualizó al jugador correctamente";
-    $_SESSION['icono'] = "success";
+    $_SESSION['color'] = "alert alert-success";
     header('Location: ' . $URL . '/client/entrenador/views/jugadores/index.php');
 } else {
     session_start();
     $_SESSION['mensaje'] = "Error al actualizar";
-    $_SESSION['icono'] = "error";
+    $_SESSION['color'] = "alert alert-danger";
     header('Location: ' . $URL . '/client/entrenador/views/jugadores/index.php');
 }
