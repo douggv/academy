@@ -1,5 +1,6 @@
 <?php include '../../layouts/verificacion.php'; ?>
 <?php include '../../layouts/parte1.php'; ?>    
+<?php include '../../../../alert.php'; ?> 
 
 <?php 
 // Consulta para obtener entrenadores y su universidad asignada
@@ -164,8 +165,7 @@ $entrenadores = $query->fetchAll(PDO::FETCH_ASSOC);
                                 <a href="update.php?id=<?php echo $coach['id_usuario']; ?>" class="btn btn-outline-warning btn-sm border-0">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="update.php?id=<?php echo $coach['id_usuario']; ?>" class="btn btn-outline-danger btn-sm border-0">
-                                    <i class="fas fa-trash"></i>
+                                
                             </td>
 
                         </tr>

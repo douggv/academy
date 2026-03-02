@@ -88,14 +88,14 @@
 
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <<label class="form-label fw-bold">Altura (cm)</label>
+                                <<label class="form-label fw-bold">Altura (m)</label>
                                 <input type="text" 
                                     name="altura_jugador" 
                                     class="form-control" 
-                                    pattern="^[0-9,]+$" 
+                                    pattern="^[0-9.]+$" 
                                     placeholder="180"
-                                    title="Solo se permiten números y comas (,)" 
-                                    oninput="this.value = this.value.replace(/[^0-9,]/g, '')"
+                                    title="Solo se permiten números y puntos (.)" 
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
                                     required>
                             </div>
                             <div class="col-md-4 mb-3">

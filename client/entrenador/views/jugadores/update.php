@@ -67,16 +67,16 @@ include '../../layouts/parte1.php';
 
                         <div class="row mt-3">
                             <div class="col-md-4 mb-3">
-                                <label class="form-label fw-bold">Altura (cm)</label>
+                                <label class="form-label fw-bold">Altura (m)</label>
                                 <input type="text" 
                                     name="altura_jugador" 
                                     class="form-control" 
                                     value="<?php echo $jugador['altura_jugador']; ?>" 
-                                    pattern="^[0-9,]+$" 
-                                    title="Solo se permiten números y comas (,)" 
-                                    oninput="this.value = this.value.replace(/[^0-9,]/g, '')"
+                                    pattern="^[0-9.]+$" 
+                                    title="Solo se permiten números y puntos (.)" 
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
                                     required>
-                                <div class="form-text text-muted">Use solo números y comas.</div>
+                                <div class="form-text text-muted">Use solo números y puntos.</div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label class="form-label fw-bold">Peso (kg)</label>

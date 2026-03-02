@@ -79,7 +79,7 @@
                             <i class="fas fa-map-marker-alt"></i> 
                             <?php 
                                 // Ajusta 'ciudad' y 'estado' según los nombres reales de tus columnas
-                                echo htmlspecialchars($uni['ciudad'] ?? '') . ", " . htmlspecialchars($uni['estado'] ?? ''); 
+                                echo htmlspecialchars($uni['ciudad'] ?? '') . " " . htmlspecialchars($uni['estado'] ?? ''); 
                             ?>
                         </p>
                     </div>

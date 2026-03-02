@@ -52,7 +52,7 @@
                 <tr>
                     <th>Nombre del Jugador</th>
                     <th>Email</th>
-                    <th class="text-center">Altura (cm)</th>
+                    <th class="text-center">Altura (m)</th>
                     <th class="text-center">Peso (kg)</th>
                     <th class="text-center">Acciones</th>
                 </tr>

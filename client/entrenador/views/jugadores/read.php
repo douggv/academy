@@ -56,7 +56,7 @@ if (!$jugadores) {
                                 </tr>
                                 <tr>
                                     <th class="text-muted">Altura:</th>
-                                    <td><?php echo $jugadores['altura_jugador']; ?> cm</td>
+                                    <td><?php echo $jugadores['altura_jugador']; ?> m</td>
                                 </tr>
                                 <tr>
                                     <th class="text-muted">Peso:</th>

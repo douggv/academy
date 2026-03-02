@@ -99,6 +99,9 @@
                 <a href="<?php echo $URL . '/client/entrenador/views/jugadores/reporte.php'; ?>"><i class="fas fa-calendar-check"></i> Reporte de Jugadores</a>
             </li>
             <li>
+                <a href="<?php echo $URL . '/client/entrenador/views/asistencia/index.php'; ?>"><i class="fas fa-calendar-check"></i>Entrenamientos</a>
+            </li>
+            <li>
                 <a href="<?php echo $URL . '/client/entrenador/views/torneos/index.php'; ?>"><i class="fas fa-trophy"></i> Ver Torneos</a>
             </li>
         </ul>

@@ -197,3 +197,83 @@ $juegos = $query_juegos->fetchAll(PDO::FETCH_ASSOC);
 
     </div>
 </div>
+
+
+<?php 
+// --- NUEVA SECCIÓN DE ASISTENCIAS ---
+// 3. Obtener Entrenamientos de su Universidad
+$fecha_actual_asistencia = date('Y-m-d H:i:s');
+$query_asistencias = $pdo->prepare("SELECT * FROM asistencia 
+    WHERE id_universidad_fk = :id_uni 
+    ORDER BY fecha_hora_asistencia DESC");
+$query_asistencias->execute(['id_uni' => $atleta['id_universidad_fk']]);
+$entrenamientos = $query_asistencias->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <h5 class="fw-bold"><i class="bi bi-calendar-check text-warning"></i> Mi Calendario de Entrenamientos</h5>
+        </div>
+        
+        <?php if (count($entrenamientos) > 0): ?>
+            <?php foreach ($entrenamientos as $entreno): 
+                $fecha_e = $entreno['fecha_hora_asistencia'];
+                $es_hoy = (date('Y-m-d', strtotime($fecha_e)) == date('Y-m-d'));
+                $es_pasado = ($fecha_e < $fecha_actual_asistencia && !$es_hoy);
+                
+                // Configuración de estilo según estado
+                if ($es_hoy) {
+                    $border = "border-start border-4 border-success";
+                    $badge_class = "bg-success";
+                    $estado_txt = "¡HOY!";
+                    $icon_e = "bi-star-fill";
+                } elseif ($es_pasado) {
+                    $border = "border-start border-4 border-secondary opacity-75";
+                    $badge_class = "bg-secondary";
+                    $estado_txt = "FINALIZADO";
+                    $icon_e = "bi-check-circle";
+                } else {
+                    $border = "border-start border-4 border-primary";
+                    $badge_class = "bg-primary";
+                    $estado_txt = "PRÓXIMO";
+                    $icon_e = "bi-clock-history";
+                }
+            ?>
+                <div class="col-md-4 mb-3">
+                    <div class="card hub-card h-100 <?= $border ?> shadow-sm">
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <span class="badge <?= $badge_class ?> rounded-pill"><?= $estado_txt ?></span>
+                                <i class="bi <?= $icon_e ?> fs-4 text-muted"></i>
+                            </div>
+                            <h6 class="fw-bold mb-1 text-uppercase"><?= $entreno['descripcion'] ?></h6>
+                            <p class="text-muted small mb-0">
+                                <i class="bi bi-calendar3"></i> <?= date('d/m/Y', strtotime($fecha_e)) ?><br>
+                                <i class="bi bi-alarm"></i> <?= date('h:i A', strtotime($fecha_e)) ?>
+                            </p>
+                            
+                            <?php if($es_hoy): ?>
+                                <div class="mt-3">
+                                    <button class="btn btn-sm btn-success w-100 rounded-pill">Confirmar mi llegada</button>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="col-12">
+                <div class="alert alert-light border shadow-sm text-center">
+                    <i class="bi bi-info-circle me-2"></i> No hay entrenamientos programados para tu academia.
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+

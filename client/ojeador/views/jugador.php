@@ -8,11 +8,10 @@ if (isset($_GET['id'])) {
     $id_universidad = $_GET['id_universidad'] ?? null;
 
     // Consulta con INNER JOIN y SUBQUERIE para contar partidos jugados
-    $query = $pdo->prepare("SELECT j.*, u.nombre_universidad, u.ubicacion, o.puntos_o, o.asistencias_o, o.rebotes_o, o.robos_o,
+    $query = $pdo->prepare("SELECT j.*, u.nombre_universidad, u.ubicacion, j.puntos, j.asistencias, j.rebotes, j.robos,
                             (SELECT COUNT(*) FROM resultados_individuales ri WHERE ri.id_jugador_fk = j.id_jugador) as partidos_totales
                             FROM jugadores j
                             INNER JOIN academias u ON j.id_universidad_fk = u.id_universidad
-                            INNER JOIN objetivos o ON j.id_objetivo_fk = o.id_objetivo
                             WHERE j.id_jugador = :id");
     $query->bindParam(':id', $id_jugador);
     $query->execute();

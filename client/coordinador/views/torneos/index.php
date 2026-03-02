@@ -74,18 +74,27 @@ $juegos = $query->fetchAll(PDO::FETCH_ASSOC);
                             </td>
                             <td class="text-end pe-4">
                                 <div class="btn-group shadow-sm">
-                                    <a href="update.php?id=<?php echo $juego['id_juego']; ?>" class="btn btn-white btn-sm border">
-                                        <i class="bi bi-pencil-square text-primary">Actualizar</i>
-                                    </a>
-                                    <button onclick="confirmarEliminar(<?php echo $juego['id_juego']; ?>)" class="btn btn-white btn-sm border">
-                                        <i class="bi bi-trash text-danger">Eliminar</i>
-                                    </button>
-                                    <?php if (strtotime($juego['fecha_juego']) < time()): ?>
-                                    <a href="resultados.php?id=<?php echo $juego['id_juego']; ?>" class="btn btn-white btn-sm border">
-                                        <i class="bi bi-bar-chart-line text-success">Resultados</i>
-                                    </a>
+                                    <?php 
+                                    // Capturamos la fecha actual y la del juego
+                                    $hoy = date('Y-m-d');
+                                    $fecha_juego = $juego['fecha_juego'];
+
+                                    // LÓGICA CONTRARIA: Si la fecha del juego es MAYOR a hoy (es decir, el partido es mañana o después)
+                                    // se muestran Actualizar y Eliminar.
+                                    if ($fecha_juego > $hoy): ?>
+                                        <a href="update.php?id=<?php echo $juego['id_juego']; ?>" class="btn btn-white btn-sm border">
+                                            <i class="bi bi-pencil-square text-primary">Actualizar</i>
+                                        </a>
+                                        
                                     <?php endif; ?>
-                                    <?php if (strtotime($juego['fecha_juego']) < time()): ?>
+
+                                    <?php 
+                                    // ESTA ES TU LÓGICA ACTUAL (La que ya funciona):
+                                    // Si la fecha es hoy o ya pasó, se muestran los resultados.
+                                    if ($fecha_juego <= $hoy): ?>
+                                        <a href="resultados.php?id=<?php echo $juego['id_juego']; ?>" class="btn btn-white btn-sm border">
+                                            <i class="bi bi-bar-chart-line text-success">Resultados</i>
+                                        </a>
                                         <a href="puntuacion.php?id=<?php echo $juego['id_juego']; ?>" class="btn btn-white btn-sm border">
                                             <i class="bi bi-bar-chart-line text-success">puntuacion</i>
                                         </a>
